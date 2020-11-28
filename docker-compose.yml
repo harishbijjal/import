@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  springboot:
+    image: dockerhandson/spring-boot-mongo
+    environment:
+    - MONGO_DB_HOSTNAME=mongo
+    ports:
+      - 8080:8080
+    networks:
+      - springnet
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongodb:/data/db
+    networks:
+    - springnet
+
+volumes:
+  mongodb:
+    external: true
+
+networks:
+  springnet:
+     external: true
